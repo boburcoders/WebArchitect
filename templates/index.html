@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wetather Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<div class="mainbody">
+    <form action="/" method="GET">
+    <div class="get_info" style="margin-left: 60px; width: 830px;"  >
+        <div class="header">
+            <head>
+                    <p style="margin-left: 220px; font-size: 35px;">
+                        <strong>
+                            <label for="city">City Name:</label>
+                            <input type="text" id="city" name="city" required style="width: 220px; height: 28px; font-size: 26px;">
+                        </strong>
+                    </p>
+            </head>
+        </div>
+        <div class="icon">
+            {% if last_data %}
+           <img style="font-size: 20px;" src="{% static 'images/th.jpeg' %}" alt="" id="icon">
+<!--            <img src="{% static 'images/media   ' %}{{ last_data.icon }}.png" alt="Weather Icon" id="icon">-->
+            <strong id="get_temp">{{last_data.temperature|floatformat:1}}°C</strong>
+            <div class="data">
+                <h1 style="margin-left: 75px;">Pressure: </h1>
+                <h3 style="margin-top: 28px; margin-left: 30px; font-size: 24px;" id="pressure">{{last_data.pressure|floatformat:0}} </h3>
+                <h3 style="margin-top: 28px; margin-left: 4px; font-size: 24px; display: inline;">hPa</h3>
+            </div>
+        </div>
+        <h1><strong id="myclouds">{{last_data.description}}</strong></h1>
+        {% endif %}
+        <button type="submit">Get Weather</button>
+    </div>
+    </form>
+    <div class="temp">
+        <img src="{% static 'images/weather-animate.svg' %}" alt="clouds">
+    </div>
+
+
+</div>
+
+
+</body>
+</html>
