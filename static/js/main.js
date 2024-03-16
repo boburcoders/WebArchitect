@@ -1,7 +1,7 @@
 function getWeather() {
     let city = document.getElementById("city_input").value; // Get city from input field
 
-    fetch(`http://127.0.0.1:8000/weather/${city}/`)
+    fetch(`https://webarchitect.onrender.com/weather/${city}/`)
       .then(response => response.json())
       .then(data => {
         // Update city name in header
