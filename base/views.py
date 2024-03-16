@@ -26,27 +26,37 @@ def get_weather(request, city):
 
 def get_weather_by_city(request, city_name):
     try:
-        get_weather(request, city_name)
+        # Call the get_weather function to retrieve weather data
+        weather_data = get_weather(request, city_name)
     except:
+        # Handle exceptions such as City not found
         return JsonResponse({"message": "City not found"}, status=404)
 
-    weather_data = WeatherData.objects.filter(city_name=city_name).last()
+    # Query the database to get weather data for the specified city
+    weather_data = WeatherData.objects.filter(city_name=city_name)
 
-    if weather_data:
-        # Serialize the retrieved data
-        serialized_data = {
-            "city_name": weather_data.city_name,
-            "pressure": weather_data.pressure,
-            "temperature": weather_data.temperature,
-            "description": weather_data.description,
-            "updated": weather_data.updated.strftime("%Y-%m-%d %H:%M:%S")
-        }
-        # Return the serialized data as a JSON response
-        return JsonResponse(serialized_data)
+    if weather_data.exists():
+        # Initialize an empty list to store serialized data
+        serialized_data_list = []
+
+        # Loop through each WeatherData object
+        for data in weather_data:
+            # Serialize the data for each object
+            serialized_data = {
+                "city_name": data.city_name,
+                "pressure": data.pressure,
+                "temperature": data.temperature,
+                "description": data.description,
+                "updated": data.updated.strftime("%Y-%m-%d %H:%M:%S")
+            }
+            # Append the serialized data to the list
+            serialized_data_list.append(serialized_data)
+
+        # Return the list of serialized data as a JSON response
+        return JsonResponse(serialized_data_list, safe=False)
     else:
         # If no data found for the given city_name, return a 404 response
         return JsonResponse({"error": "Data not found for the specified city"}, status=404)
-
 
 def get_city_input(request):
     city = request.GET.get('city')
