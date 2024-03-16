@@ -1,10 +1,11 @@
-let city = "Manchester"; // Since you're fetching weather data for Tashkent
+function getWeather() {
+    let city = document.getElementById("city_input").value; // Get city from input field
 
-  function getWeather() {
     fetch(`http://127.0.0.1:8000/weather/${city}/`)
       .then(response => response.json())
       .then(data => {
-        // console.log(data);
+        // Update city name in header
+        document.getElementById("city_name").innerHTML = city.toUpperCase();
 
         let temperature = data['temperature'];
         let clouds = data['description'];
@@ -21,4 +22,3 @@ let city = "Manchester"; // Since you're fetching weather data for Tashkent
         console.log(err);
       });
   }
-

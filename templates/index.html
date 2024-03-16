@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wetather Page</title>
+    <title>Weather Page</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script src="{% static 'js/main.js' %}"></script>
@@ -12,29 +12,26 @@
    <div class="mainbody">
     <div class="get_info">
        <div class="header">
-        <head>
-          <p style="margin-left: 220px; font-size: 35px;"><strong> MANCHESTER</strong></p>
-         </head>
+          <h1 id="city_name" style="margin-left: 220px; font-size: 35px;">
+              <input type="text" id="city_input" placeholder="Enter city name" style="width: 250px; font-size: 28px; padding: 5px;" aria-required="true">
+          </h1>
        </div>
        <div class="icon">
-           <img style="font-size: 20px; width: 230px" src="{% static 'images/OIP.jpeg' %}" alt=""id = "icon" >
+           <img style="font-size: 20px; width: 230px" src="{% static 'images/OIP.jpeg' %}" alt=""id="icon">
             <strong id="get_temp">10°C</strong>
        <div class="data">
             <h1 style="margin-left: 80px;">Pressure:</h1>
-            <h3 style="margin-top: 28px; margin-left: 50px; font-size: 24px;" id="pressure">1002</h3>
+            <h3 style="margin-top: 28px; margin-left: 50px; font-size: 24px;" id="pressure">1002hPa</h3>
        </div>
        </div>
        <h1><strong id="myclouds">Partly cloud</strong></h1>
+<!--       <input type="text" id="city_input" placeholder="Enter city name">-->
       <button onclick="getWeather()">Get Weather </button>
     </div>
 
     <div class="temp">
         <img src="{% static 'images/weather-animate.svg' %}" alt="clouds">
     </div>
-
-
   </div>
-
-
 </body>
 </html>
