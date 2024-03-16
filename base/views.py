@@ -14,32 +14,17 @@ API_KEY = 'b19ef47e383821acf92694c11bf2f394'
 
 
 def get_weather(request, city):
-    # Check if weather data is cached
-    # cached_weather_data = cache.get('cached_weather_data')
-    #
-    # if cached_weather_data:
-    #     weather_data = cached_weather_data
-    # else:
-    # Fetch weather data from external API
-    # city = "Manchester"  # Default city for this example
     url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}"
     response = requests.get(url)
     json_res = response.json()
-
-    # Extract relevant weather data from the API response
-    temperature = json_res['main']['temp'] - 272.15  # Convert temperature from Kelvin to Celsius
+    temperature = json_res['main']['temp'] - 272.15
     pressure = json_res['main']['pressure']
     description = json_res['weather'][0]['description']
-
-    # Save weather data to the database
-    weather_data = WeatherData.objects.create(city_name=city, description=description,
-                                              temperature=temperature, pressure=pressure)
-
-        # cache.set('cached_weather_data', weather_data, timeout=60*5)
+    WeatherData.objects.create(city_name=city, description=description,
+                               temperature=temperature, pressure=pressure)
 
 
 def get_weather_by_city(request, city_name):
-    # Query the database for WeatherData objects with the given city_name
     try:
         get_weather(request, city_name)
     except:
