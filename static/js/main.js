@@ -6,7 +6,7 @@ let lon = -2.2451;
 
 function getWeather() {
   //get lat and lon
-  fetch(`http://127.0.0.1:8000/weather/${city}`)
+  fetch(`https://webarchitect.onrender.com/weather/${city}/`)
     // Convert response string to json object
     .then(response => response.json())
     .then(response => {

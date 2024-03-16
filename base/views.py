@@ -95,7 +95,7 @@ def get_city_input(request):
                                                           temperature=temperature, pressure=pressure)
 
                 # Cache the weather data for future requests (cache for 1 hour in this example)
-                cache.set('cached_weather_data', weather_data, timeout=6)
+                cache.set('cached_weather_data', weather_data, timeout=60)
 
         return render(request, 'index.html', {"last_data": weather_data})
 
